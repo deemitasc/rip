@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <pim>
+            <api>
+                <base_url>https://api.catsy.com/</base_url>
+                <base_path>cf-cm2/api/v3/</base_path>
+            </api>
+            <sync>
+                <magento_attribute_prefix>catsy_</magento_attribute_prefix>
+                <pim_ignored_attribute_properties>is_searchable</pim_ignored_attribute_properties>
+            </sync>
+        </pim>
+    </default>
+</config>

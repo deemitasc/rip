@@ -1,0 +1,29 @@
+{
+    "name": "ripenecommerce/magento2-catsy-integration",
+    "description": "Catsy integration for Magento 2",
+    "type": "magento2-module",
+    "authors": [
+        {
+            "name": "Misha Medvedev",
+            "email": "mmedvedev@ripen.com",
+            "homepage": "http://ripen.com",
+            "role": "Developer"
+        }
+    ],
+    "license": [
+        "Proprietary"
+    ],
+    "require": {
+        "php": "^7.2",
+        "magento/framework": "*",
+        "ripenecommerce/magento2-pim-integration": "^2.0"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Ripen\\CatsyIntegration\\": ""
+        }
+    }
+}

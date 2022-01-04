@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="catsy_products_sync">
+        <job name="catsy_sync_all" instance="Ripen\CatsyIntegration\Cron\SyncAll" method="execute">
+            <config_path>pim/sync/data_sync_schedule</config_path>
+        </job>
+    </group>
+</config>

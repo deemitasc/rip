@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Ripen\PimIntegration\Model\DataFormatter"      type="Ripen\CatsyIntegration\Model\DataFormatter" />
+    <preference for="Ripen\PimIntegration\Model\AttributeMapper"    type="Ripen\CatsyIntegration\Model\AttributeMapper" />
+    <preference for="Ripen\PimIntegration\Model\DataParserInterface"      type="Ripen\CatsyIntegration\Model\DataParser" />
+    <preference for="Ripen\PimIntegration\Model\PimCategoryInterface" type="Ripen\CatsyIntegration\Model\CatsyCategory" />
+</config>
