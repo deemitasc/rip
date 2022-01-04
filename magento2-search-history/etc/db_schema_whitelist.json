@@ -1,0 +1,18 @@
+{
+    "ripen_search_history_log": {
+        "column": {
+            "query_id": true,
+            "query_text": true,
+            "customer_id": true,
+            "updated_at": true,
+            "created_at": true
+        },
+        "index": {
+            "RIPEN_SEARCH_HISTORY_LOG_CUSTOMER_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "RIPEN_SEARCH_HISTORY_LOG_QUERY_TEXT_CUSTOMER_ID": true
+        }
+    }
+}

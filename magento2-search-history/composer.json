@@ -1,0 +1,35 @@
+{
+    "name": "ripenecommerce/magento2-search-history",
+    "description": "Prophet21 Search History for Magento 2",
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "authors": [
+        {
+            "name": "Misha Medvedev",
+            "email": "mmedvedev@ripen.com",
+            "homepage": "http://ripen.com",
+            "role": "Developer"
+        },
+        {
+            "name": "Scott Buchanan",
+            "email": "sbuchanan@ripen.com",
+            "homepage": "https://ripen.com",
+            "role": "Developer"
+        }
+    ],
+    "license": [
+        "Proprietary"
+    ],
+    "require": {
+        "php": "^7.2",
+        "magento/framework": "*"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Ripen\\SearchHistory\\": ""
+        }
+    }
+}

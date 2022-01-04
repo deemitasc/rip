@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="ripen_search_history_log" comment="Search History Log">
+        <column xsi:type="int" name="query_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Query ID"/>
+        <column xsi:type="varchar" name="query_text" nullable="true" length="255" comment="Query text"/>
+        <column xsi:type="int" name="customer_id" padding="10" unsigned="true" nullable="true" comment="Customer ID"/>
+        <column xsi:type="timestamp" name="created_at" default="CURRENT_TIMESTAMP" on_update="false" comment="Updated at"/>
+        <column xsi:type="timestamp" name="updated_at" default="CURRENT_TIMESTAMP" on_update="true" comment="Updated at"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="query_id"/>
+        </constraint>
+        <constraint xsi:type="unique" referenceId="RIPEN_SEARCH_HISTORY_LOG_QUERY_TEXT_CUSTOMER_ID">
+            <column name="query_text"/>
+            <column name="customer_id"/>
+        </constraint>
+        <index referenceId="INDEX_CUSTOMER_ID" indexType="btree">
+            <column name="customer_id"/>
+        </index>
+    </table>
+</schema>
