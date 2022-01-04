@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <payment>
+            <invoicepayment>
+                <active>1</active>
+                <validate_customer>1</validate_customer>
+                <validate_credit_status>1</validate_credit_status>
+                <validate_credit_limit>1</validate_credit_limit>
+                <title>Payment By Invoice</title>
+                <order_status>pending_payment</order_status>
+                <instructions></instructions>
+                <payment_action>true</payment_action>
+                <model>Ripen\InvoicePayment\Model\Invoicepayment</model>
+                <group>offline</group>
+            </invoicepayment>
+        </payment>
+    </default>
+</config>
