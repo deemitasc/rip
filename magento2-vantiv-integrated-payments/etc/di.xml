@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- Magento Framework Overrides -->
+    <preference for="Magento\Payment\Block\Info\Cc" type="Ripen\VantivIntegratedPayments\Block\Payment\Info\Cc" />
+
+    <type name="Ripen\VantivIntegratedPayments\Logger\Logger">
+        <arguments>
+            <argument name="name" xsi:type="string">VantivIntegratedPayments</argument>
+            <argument name="handlers" xsi:type="array">
+                <item name="file" xsi:type="object">Ripen\VantivIntegratedPayments\Logger\FileHandler</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Ripen\VantivIntegratedPayments\Logger\FileHandler" type="Magento\Framework\Logger\Handler\Base">
+        <arguments>
+            <argument name="fileName" xsi:type="string">var/log/vantiv-integrated-payments.log</argument>
+        </arguments>
+    </virtualType>
+</config>

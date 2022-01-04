@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <payment>
+            <ripen_vantivintegratedpayments>
+                <title>Credit Card</title>
+                <model>Ripen\VantivIntegratedPayments\Model\Cc</model>
+                <active>0</active>
+                <cctypes>AE,VI,MC,DI</cctypes>
+                <api_avs_code_whitelist>_BCDEFGIJKMPRSTUVWYZ0</api_avs_code_whitelist>
+                <api_cvv_code_whitelist>_MPSUX</api_cvv_code_whitelist>
+                <api_avs_failed_user_message>Credit card information was incorrect. Please check your CVV and billing address for accuracy.</api_avs_failed_user_message>
+                <certification_active>0</certification_active>
+                <api_cc_auth_mode_active>0</api_cc_auth_mode_active>
+            </ripen_vantivintegratedpayments>
+        </payment>
+    </default>
+</config>
