@@ -1,0 +1,34 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * Do not edit or add to this file if you wish to upgrade to newer versions in the future.
+ * If you wish to customise this module for your needs.
+  *
+ * @category   Ripen
+ * @package    Ripen_CustomerPassword
+ * @copyright  Copyright (c) 2018 Kiwi Commerce Ltd (https://kiwicommerce.co.uk/)
+ * @copyright  Copyright (c) Ripen (https://ripen.com/)
+ * @license    https://opensource.org/licenses/OSL-3.0
+*/
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="customer_password" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+            <label>Customer Password</label>
+            <tab>customer</tab>
+            <resource>Ripen_CustomerPassword::config_customerpassword</resource>
+            <group id="general" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+                <label>General</label>
+                <field id="enable" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="select">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="enable_cli" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label comment" type="select">
+                    <label>Console Command</label>
+                    <comment><![CDATA[Enable console command to change customer's password by either id or email <br /><code>customer:password:change [-p|--password="..."] [-i|--customer-id[="..."]] [-e|--customer-email[="..."]]</code> ]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

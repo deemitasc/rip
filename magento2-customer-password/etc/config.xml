@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+<!--
+/**
+* Do not edit or add to this file if you wish to upgrade to newer versions in the future.
+* If you wish to customise this module for your needs.
+*
+* @category   Ripen
+* @package    Ripen_CustomerPassword
+* @copyright  Copyright (c) 2018 Kiwi Commerce Ltd (https://kiwicommerce.co.uk/)
+* @copyright  Copyright (c) Ripen, LLC (https://ripen.com/)
+* @license    https://opensource.org/licenses/OSL-3.0
+*/
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+	<default>
+		<customer_password>
+			<general>
+				<enable>1</enable>
+				<enable_cli>0</enable_cli>
+			</general>
+		</customer_password>
+	</default>
+</config>
