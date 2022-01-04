@@ -56,6 +56,11 @@ class CurrentStatement extends \Magento\Framework\App\Helper\AbstractHelper
      */
     protected $timezone;
 
+    /**
+     * @var \Magento\Catalog\Api\ProductRepositoryInterface
+     */
+    protected $productRepository;
+
     const FILTER_PAYMENT_PARAM = 'paid';
     const FILTER_FROM_DATE_PARAM = 'from_date';
     const FILTER_TO_DATE_PARAM = 'to_date';
@@ -69,7 +74,8 @@ class CurrentStatement extends \Magento\Framework\App\Helper\AbstractHelper
         \Ripen\SimpleApps\Model\Api $api,
         \Magento\Framework\Api\SearchCriteriaBuilderFactory $searchCriteriaBuilderFactory,
         \Magento\Sales\Api\OrderRepositoryInterface $orderRepository,
-        \Magento\Framework\Stdlib\DateTime\TimezoneInterface $timezone
+        \Magento\Framework\Stdlib\DateTime\TimezoneInterface $timezone,
+        \Magento\Catalog\Api\ProductRepositoryInterface $productRepository
     ) {
         $this->customerSession = $customerSession;
         $this->customerFactory = $customerFactory;
@@ -79,6 +85,7 @@ class CurrentStatement extends \Magento\Framework\App\Helper\AbstractHelper
         $this->searchCriteriaBuilderFactory = $searchCriteriaBuilderFactory;
         $this->orderRepository = $orderRepository;
         $this->timezone = $timezone;
+        $this->productRepository = $productRepository;
 
         parent::__construct($context);
     }
@@ -231,7 +238,7 @@ class CurrentStatement extends \Magento\Framework\App\Helper\AbstractHelper
         $params['customer_id'] = $this->getCustomerCode();
         $params['limit'] = self::INVOICE_IMPORT_LIMIT;
 
-        return $this->api->getInvoiceLineItems($invoiceNo, $params);
+        return $this->addProductAttributes($this->api->getInvoiceLineItems($invoiceNo, $params));
     }
 
     /**
@@ -303,5 +310,22 @@ class CurrentStatement extends \Magento\Framework\App\Helper\AbstractHelper
         }
 
         return $results;
+    }
+
+    /**
+     * @param $data
+     * @return array
+     */
+    protected function addProductAttributes($data)
+    {
+        foreach ($data as $key => $line) {
+            try {
+                $product = $this->productRepository->get($line['item_id']);
+                $data[$key]['p21_short_code'] = $product->getData('p21_short_code');
+            } catch (\Magento\Framework\Exception\NoSuchEntityException $e) {
+                $data[$key]['p21_short_code'] = '';
+            }
+        }
+        return $data;
     }
 }

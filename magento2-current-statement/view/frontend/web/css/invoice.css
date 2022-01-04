@@ -58,6 +58,10 @@
     font-size: 10px;
 }
 
+.invoice-items .invoice-item-short-code {
+    font-size: 10px;
+}
+
 .totals-wrapper {
     display: block;
     width: 100%;

@@ -22,7 +22,7 @@
     "require": {
         "php": "^7.2",
         "magento/framework": "*",
-        "ripenecommerce/magento2-prophet21": "^3.0",
+        "ripenecommerce/magento2-prophet21": "^3.0|^4.0",
         "ripenecommerce/magento2-simpleapps": "^2.0"
     },
     "autoload": {

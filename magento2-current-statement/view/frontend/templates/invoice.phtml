@@ -3,6 +3,7 @@
 
 /** @var \Ripen\CurrentStatement\Helper\CurrentStatement $statementHelper */
 $statementHelper = $this->helper('Ripen\CurrentStatement\Helper\CurrentStatement');
+// TODO: Handle this properly in the controller and make sure that another user's invoice cannot be viewed
 $invoice = $statementHelper->getInvoice($this->getRequest()->getParam('invoice_no'));
 $lineItems = $statementHelper->getInvoiceLines($invoice['invoice_no']);
 $order = $statementHelper->getOrder($invoice);
@@ -116,6 +117,9 @@ $webOrderNumber = $statementHelper->getOrderIncrementId($invoice['order_no']);
                 <td>
                     <div class="invoice-item-id"><?= $lineItem['item_id'] ?></div>
                     <div class="invoice-item-name"><?= $lineItem['item_desc'] ?></div>
+                    <?php if (!empty($lineItem['p21_short_code'])): ?>
+                        <div class="invoice-item-short-code"><?= $lineItem['p21_short_code'] ?></div>
+                    <?php endif; ?>
                 </td>
                 <td><?= $statementHelper->formatAccountingAmount($lineItem['unit_price']) ?></td>
                 <td><?= $statementHelper->formatAccountingAmount($lineItem['extended_price']) ?></td>
