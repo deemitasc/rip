@@ -1,0 +1,37 @@
+.payment-form {
+    float: left;
+    width: 50%;
+    margin-top: 20px;
+}
+
+.payment-form td {
+    padding:5px;
+}
+
+.payment-form .payment-form-container {
+    border: 1px solid #efefef;
+    padding: 10px;
+    background-color: #f6f6f6;
+}
+
+#invoice_payment_amount {
+    text-align: center;
+    width:100px;
+}
+
+.payment-form #cc_zip {
+    width: 50%;
+}
+
+.payment-form .actions-toolbar .primary {
+    float: right;
+}
+
+.payment-form .actions-toolbar .primary .action{
+    margin: 0px;
+}
+
+#invoice_payment_response {
+    color: #e02b27;
+}
+

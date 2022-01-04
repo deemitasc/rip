@@ -1,0 +1,19 @@
+{
+    "paymybill_log": {
+        "column": {
+            "id": true,
+            "created_at": true,
+            "customer_id": true,
+            "erp_customer_id": true,
+            "transaction_id": true,
+            "invoices": true,
+            "amount": true,
+            "amount_with_surcharge": true,
+            "response_code": true,
+            "response": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

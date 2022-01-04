@@ -1,0 +1,20 @@
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+
+    <!-- PayMyBill Log Table -->
+    <table name="paymybill_log" resource="default" engine="innodb" comment="PayMyBill Log">
+        <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true" comment="Log ID"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Log Creation Time"/>
+        <column xsi:type="varchar" name="customer_id" nullable="true" length="255" comment="Customer ID"/>
+        <column xsi:type="varchar" name="erp_customer_id" nullable="true" length="255" comment="ERP Customer ID"/>
+        <column xsi:type="varchar" name="transaction_id" nullable="true" length="255" comment="Transaction ID"/>
+        <column xsi:type="varchar" name="invoices" nullable="true" length="255" comment="Invoice Selected"/>
+        <column xsi:type="varchar" name="amount" nullable="true" length="255" comment="Amount"/>
+        <column xsi:type="varchar" name="amount_with_surcharge" nullable="true" length="255" comment="Amount With Surcharge"/>
+        <column xsi:type="smallint" name="response_code" padding="6" unsigned="false" nullable="true" identity="false" default="0" comment="Response Code"/>
+        <column xsi:type="mediumtext" name="response" nullable="true" comment="Response (json_body)"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+    </table>
+</schema>

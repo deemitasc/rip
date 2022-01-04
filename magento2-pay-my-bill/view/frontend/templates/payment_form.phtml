@@ -1,0 +1,104 @@
+<?php
+/** @var Ripen\PayMyBill\Block\Payment $block */
+?>
+
+<?php if($block->isPaymentLinkEnabled()):?>
+<form id="payment-form" class="payment-form form-account-simple" method="post">
+    <input type="hidden" name="context" value="<?php echo $block->escapeHtml($block->getRequest()->getParam('context')); ?>"/>
+    <input type="hidden" id="invoices" name="invoices" value=""/>
+    <?php echo $block->getBlockHtml('formkey') ?>
+
+    <div class="table-wrapper payment-form-container">
+        <table class="data">
+            <tbody>
+            <tr>
+                <td class="col options" colspan="2">
+                    <div class="control">
+                        <label class="label" for="amount"><span>Amount</span></label>
+                        <div class="field required">
+                            <input type="number" name="amount" id="invoice_payment_amount" class="custom-width required-entry validate-greater-than-zero" value="" size="8" aria-required="true" placeholder="0.00">
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="col options" colspan="2">
+                    <div class="control">
+                        <label class="label" for="card_holder_name"><span>Name On Card</span></label>
+                        <div class="field required">
+                            <input type="text" id="card-holder-name" name="card_holder_name" class="input-text required-entry" value=""/>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="col options" colspan="2">
+                    <div class="control">
+                        <label class="label" for="cc_number"><span>Credit Card Number</span></label>
+                        <div class="field required">
+                            <input type="number" id="cc_number" name="cc_number" class="input-text required-entry" value=""/>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="col options">
+                    <div class="control">
+                        <label class="label" for="cc_exp"><span>Exp. Date</span></label>
+                        <div class="field required">
+                            <input type="text" id="cc_exp" name="cc_exp" class="input-text required-entry" value="" placeholder="MM/YY"/>
+                        </div>
+                    </div>
+                </td>
+                <td class="col options">
+                    <div class="control">
+                        <div class="control">
+                            <label class="label" for="cc_cvv"><span>CVV</span></label>
+                            <div class="field required">
+                                <input type="number" id="cc_cvv" name="cc_cvv" class="input-text required-entry" value=""/>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <!--tr>
+                <td class="col options" colspan="2">
+                    <div class="control">
+                        <label class="label" for="cc_zip"><span>Postal Code</span></label>
+                        <div class="field required">
+                            <input type="text" id="cc_zip" name="cc_zip" class="input-text required-entry" value=""/>
+                        </div>
+                    </div>
+                </td>
+            </tr-->
+            <tr>
+                <td class="col options" colspan="2">
+                    <label>
+                        <input type="checkbox" name="on_account" value="1" />
+                        &nbsp; Apply this payment <strong>on account</strong>, not to any specific invoice.
+                    </label>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="invoice_payment_response"></div>
+
+    <div class="actions-toolbar">
+        <div class="primary">
+            <button type="submit" class="action save primary" title="Save"><span>Submit Payment</span></button>
+        </div>
+    </div>
+</form>
+
+<script type="text/x-magento-init">
+    {
+        "*" : {
+            "Ripen_PayMyBill/js/pay": {
+                "url": "<?php echo $block->getUrl('currentstatement/payment/pay'); ?>"
+            }
+        }
+    }
+</script>
+<?php endif; ?>

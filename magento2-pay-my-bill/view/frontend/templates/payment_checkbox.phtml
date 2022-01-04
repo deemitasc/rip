@@ -1,0 +1,15 @@
+<?php
+    /** @var Ripen\PayMyBill\Block\Payment $block */
+    /** @var Ripen\CurrentStatement\Helper\CurrentStatement $statementHelper */
+
+    $statementHelper = $this->helper('Ripen\CurrentStatement\Helper\CurrentStatement');
+    $invoice = $block->getInvoice();
+    $openAmount = abs($statementHelper->getOpenAmount($invoice));
+?>
+<?php if($block->isPaymentLinkEnabled()):?>
+<td>
+    <?php if($openAmount > 0):?>
+        <input type="checkbox" class="addon" name="invoice[]" value="<?php echo $invoice['invoice_no'];?>" data-amount="<?php echo $openAmount; ?>">
+    <?php endif;?>
+</td>
+<?php endif;?>

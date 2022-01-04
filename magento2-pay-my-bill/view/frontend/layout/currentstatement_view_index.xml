@@ -1,0 +1,13 @@
+<page  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="customer_account"/>
+    <head>
+        <css src="Ripen_PayMyBill::css/paymybill.css"/>
+    </head>
+    <body>
+        <referenceBlock name="currentstatement">
+            <block class="Ripen\PayMyBill\Block\Payment" name="payment_header" template="Ripen_PayMyBill::payment_header.phtml"/>
+            <block class="Ripen\PayMyBill\Block\Payment" name="payment_checkbox" template="Ripen_PayMyBill::payment_checkbox.phtml"/>
+            <block class="Ripen\PayMyBill\Block\Payment" name="payment_form" template="Ripen_PayMyBill::payment_form.phtml"/>
+        </referenceBlock>
+    </body>
+</page>

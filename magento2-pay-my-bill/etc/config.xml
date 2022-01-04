@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <paymybill>
+            <general>
+                <balance_payment_notification_template>
+                    <template>paymybill_general_balance_payment_notification_template</template>
+                </balance_payment_notification_template>
+                <enable_paymybill>1</enable_paymybill>
+                <credit_card_surcharge>0</credit_card_surcharge>
+            </general>
+        </paymybill>
+    </default>
+</config>
