@@ -1,0 +1,41 @@
+{
+    "name": "ripenecommerce/magento2-shipping-rates",
+    "description": "Shipping Rates for Magento 2",
+    "type": "magento2-module",
+    "authors": [
+        {
+            "name": "Misha Medvedev",
+            "email": "mmedvedev@ripen.com",
+            "homepage": "http://ripen.com",
+            "role": "Developer"
+        },
+        {
+            "name": "Scott Buchanan",
+            "email": "sbuchanan@ripen.com",
+            "homepage": "https://ripen.com",
+            "role": "Developer"
+        }
+    ],
+    "license": [
+        "Proprietary"
+    ],
+    "require": {
+        "php": "^7.2",
+        "magento/framework": "*",
+        "ripenecommerce/magento2-prophet21": "^3.0"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Ripen\\ShippingRates\\": ""
+        }
+    },
+    "repositories": {
+        "simple-apps": {
+            "type": "git",
+            "url": "git@bitbucket.org:ripenecom/magento2-prophet21.git"
+        }
+    }
+}

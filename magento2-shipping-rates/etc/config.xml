@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <carriers>
+            <truck>
+                <active>0</active>
+                <title></title>
+                <name>Truck</name>
+                <shipping_cost>0</shipping_cost>
+                <sallowspecific>0</sallowspecific>
+                <sort_order>15</sort_order>
+                <model>Ripen\ShippingRates\Model\Carrier\Truck</model>
+            </truck>
+            <willcall>
+                <active>0</active>
+                <title></title>
+                <name>Will Call</name>
+                <shipping_cost>0</shipping_cost>
+                <sallowspecific>0</sallowspecific>
+                <sort_order>16</sort_order>
+                <model>Ripen\ShippingRates\Model\Carrier\WillCall</model>
+            </willcall>
+            <ltlbestway>
+                <active>0</active>
+                <title></title>
+                <name>LTL Best Way</name>
+                <shipping_cost>0</shipping_cost>
+                <sallowspecific>0</sallowspecific>
+                <sort_order>17</sort_order>
+                <model>Ripen\ShippingRates\Model\Carrier\LtlBestWay</model>
+            </ltlbestway>
+        </carriers>
+    </default>
+</config>
