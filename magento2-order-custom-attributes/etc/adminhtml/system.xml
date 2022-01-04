@@ -4,11 +4,11 @@
         <section id="checkout">
             <group id="options" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
                 <field id="checkout_comments_enabled" translate="label" type="select" sortOrder="99" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Enable 'Order Comments' field</label>
+                    <label>Enable 'Order Comments' Field</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
                 <field id="checkout_specialnote_enabled" translate="label" type="select" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Special Note Enabled</label>
+                    <label>Enable 'Special Note' Field</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <comment>Enable 'Special note' field (saved in CMS block with id: checkout_message)</comment>
                 </field>
