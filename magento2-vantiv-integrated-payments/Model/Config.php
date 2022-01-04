@@ -21,18 +21,30 @@ class Config
         $this->scopeConfig = $scopeConfig;
     }
 
+    /**
+     * @return bool
+     */
+    public function isProductionMode()
+    {
+        return $this->scopeConfig->isSetFlag('payment/ripen_vantivintegratedpayments/api_prod_mode', ScopeInterface::SCOPE_STORE);
+    }
+
+    /**
+     * @return string
+     */
     public function getBaseUrl()
     {
-        $prodMode = $this->scopeConfig->getValue('payment/ripen_vantivintegratedpayments/api_prod_mode', ScopeInterface::SCOPE_STORE);
-        return $prodMode
+        return $this->isProductionMode()
             ? 'https://transaction.elementexpress.com'
             : 'https://certtransaction.elementexpress.com';
     }
 
+    /**
+     * @return string
+     */
     public function getBaseServiceUrl()
     {
-        $prodMode = $this->scopeConfig->getValue('payment/ripen_vantivintegratedpayments/api_prod_mode', ScopeInterface::SCOPE_STORE);
-        return $prodMode
+        return $this->isProductionMode()
             ? 'https://services.elementexpress.com'
             : 'https://certservices.elementexpress.com';
     }
@@ -78,19 +90,19 @@ class Config
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getCertificationActiveStatus()
     {
-        return $this->scopeConfig->getValue('payment/ripen_vantivintegratedpayments/certification_active', ScopeInterface::SCOPE_STORE);
+        return $this->scopeConfig->isSetFlag('payment/ripen_vantivintegratedpayments/certification_active', ScopeInterface::SCOPE_STORE);
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getApiCreditCardAuthorizationModeActiveStatus()
     {
-        return $this->scopeConfig->getValue('payment/ripen_vantivintegratedpayments/api_cc_auth_mode_active', ScopeInterface::SCOPE_STORE);
+        return $this->scopeConfig->isSetFlag('payment/ripen_vantivintegratedpayments/api_cc_auth_mode_active', ScopeInterface::SCOPE_STORE);
     }
 
     /**

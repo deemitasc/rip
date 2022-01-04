@@ -12,6 +12,7 @@
                 <api_avs_failed_user_message>Credit card information was incorrect. Please check your CVV and billing address for accuracy.</api_avs_failed_user_message>
                 <certification_active>0</certification_active>
                 <api_cc_auth_mode_active>0</api_cc_auth_mode_active>
+                <allowspecific>0</allowspecific>
             </ripen_vantivintegratedpayments>
         </payment>
     </default>

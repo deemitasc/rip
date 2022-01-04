@@ -27,6 +27,7 @@ class Cc extends \Magento\Payment\Model\Method\Cc
     protected $api;
     protected $checkoutSession;
     protected $apiLogger;
+    protected $config;
 
     public function __construct(
         \Magento\Framework\Model\Context $context,
@@ -41,6 +42,7 @@ class Cc extends \Magento\Payment\Model\Method\Cc
         \Magento\Checkout\Model\Session $checkoutSession,
         \Ripen\VantivIntegratedPayments\Model\Api $api,
         \Ripen\VantivIntegratedPayments\Logger\Logger $apiLogger,
+        \Ripen\VantivIntegratedPayments\Model\Config $moduleConfig,
         array $data = []
     ) {
         parent::__construct($context, $registry, $extensionFactory, $customAttributeFactory, $paymentData, $scopeConfig, $logger, $moduleList, $localeDate, null, null, $data);
@@ -48,6 +50,7 @@ class Cc extends \Magento\Payment\Model\Method\Cc
         $this->api = $api;
         $this->checkoutSession = $checkoutSession;
         $this->apiLogger = $apiLogger;
+        $this->config = $moduleConfig;
     }
 
     /**
@@ -128,7 +131,11 @@ class Cc extends \Magento\Payment\Model\Method\Cc
             // Run AVS check
             if (!$this->api->isAvsCheckPassed($response)) {
                 $this->logAVSFailedResponse($payment, $response);
-                throw new AvsCheckFailedException(__($this->api->getApiAvsFailedUserMessage()));
+                if ($this->config->isProductionMode()) {
+                    throw new AvsCheckFailedException(__($this->api->getApiAvsFailedUserMessage()));
+                } else {
+                    $this->apiLogger->notice('Bypassing AVS/CVV failure since not supported by gateway in test mode.');
+                }
             }
 
             // Check if payment has been successfully authorized.
@@ -173,7 +180,11 @@ class Cc extends \Magento\Payment\Model\Method\Cc
 
             if (!$this->api->isAvsCheckPassed($avsCheckResponse)) {
                 $this->logAVSFailedResponse($payment, $avsCheckResponse);
-                throw new AvsCheckFailedException(__($this->api->getApiAvsFailedUserMessage()));
+                if ($this->config->isProductionMode()) {
+                    throw new AvsCheckFailedException(__($this->api->getApiAvsFailedUserMessage()));
+                } else {
+                    $this->apiLogger->notice('Bypassing AVS/CVV failure since not supported by gateway in test mode.');
+                }
             }
 
             $response = $this->api->createPaymentAccount(
