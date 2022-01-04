@@ -1,0 +1,13 @@
+<div id="savecart-link" data-bind="scope:'saveCartLink'">
+    <script>
+        window.saveCartLinkConfig = <?= /* @escapeNotVerified */ $block->getSaveCartLinkConfig() ?>;
+    </script>
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <script type="text/x-magento-init">
+        {
+            "#savecart-link": {
+                "Magento_Ui/js/core/app": <?php /* @escapeNotVerified */ echo $block->getJsLayout();?>
+            }
+        }
+    </script>
+</div>

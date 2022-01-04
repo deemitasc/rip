@@ -1,0 +1,15 @@
+<?php
+// @codingStandardsIgnoreFile
+
+/** @var \Magento\Checkout\Block\Cart\Item\Renderer\Actions\Remove $block */
+/** @var Magento\Quote\Model\Quote\Item $item */
+$item = $this->getItem();
+?>
+<input type="hidden" name="quote_item_id" value="<?php echo $item->getId();?>" />
+<button type="submit"
+        name="update_cart_action"
+        value="remove_item"
+        title="<?php echo $block->escapeHtml(__('Remove item')); ?>"
+        class="action action-delete">
+    <span><?php /* @escapeNotVerified */ echo __('Remove item'); ?></span>
+</button>

@@ -1,0 +1,88 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+$saveCartHelper = $this->helper('Vekeryk\SaveCart\Helper\Data');
+$pricingHelper = $this->helper('Magento\Framework\Pricing\Helper\Data');
+
+/** @var $block \Vekeryk\SaveCart\Block\Cart\View */
+?>
+<?php $_quotes = $block->getQuotes(); ?>
+<?php echo $block->getChildHtml('info');?>
+<?php if ($_quotes && count($_quotes)): ?>
+    <div class="table-wrapper orders-history">
+        <table class="data table table-order-items history" id="my-orders-table">
+            <caption class="table-caption"><?php /* @escapeNotVerified */ echo __('Carts') ?></caption>
+            <thead>
+                <tr>
+                    <th scope="col" class="col id"><?php /* @escapeNotVerified */ echo __('Cart #') ?></th>
+                    <th scope="col" class="col date"><?php /* @escapeNotVerified */ echo __('Date') ?></th>
+                    <th scope="col" class="col shipping"><?php /* @escapeNotVerified */ echo __('Cart Name') ?></th>
+                    <th scope="col" class="col total"><?php /* @escapeNotVerified */ echo __('Cart Total') ?></th>
+                    <th scope="col" class="col actions"><?php /* @escapeNotVerified */ echo __('Actions') ?></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php /** @var \Magento\Quote\Model\Quote $_quote */?>
+                <?php foreach ($_quotes as $_quote) : ?>
+                    <tr>
+                        <td data-th="<?php echo $block->escapeHtml(__('Cart #')) ?>" class="col id"><?php /* @escapeNotVerified */ echo $saveCartHelper->getQuoteNumber($_quote) ?></td>
+                        <td data-th="<?php echo $block->escapeHtml(__('Date')) ?>" class="col date"><?php /* @escapeNotVerified */ echo $block->formatDate($_quote->getCreatedAt()) ?></td>
+                        <td data-th="<?php echo $block->escapeHtml(__('Cart Name')) ?>" class="col shipping"><?php echo $block->escapeHtml($_quote->getQuoteName()) ?></td>
+                        <td data-th="<?php echo $block->escapeHtml(__('Cart Total')) ?>" class="col total">
+                            <?php /* @escapeNotVerified */ echo $pricingHelper->currency($_quote->getSubtotal(), true, false) ?>
+                        </td>
+                        <td data-th="<?php echo $block->escapeHtml(__('Actions')) ?>" class="col actions">
+                            <?php if (!$block->isCurrent($_quote)) : ?>
+                                <form data-role="set-cart-form" action="<?php /* @escapeNotVerified */ echo $block->getAddToCartUrl($_quote); ?>" method="post" class="action" style="display: inline-block;">
+                                    <input type="hidden" name="quote_id" value="<?php /* @escapeNotVerified */ echo $_quote->getId() ?>">
+                                    <input type="hidden" name="cart_action" value="add_to_cart">
+                                    <?php echo $block->getBlockHtml('formkey') ?>
+                                    <a href="#" title="<?php echo $block->escapeHtml(__('Add to Cart')); ?>" class="action add-to-cart">
+                                        <span><?php echo $block->escapeHtml(__('Add to Cart')) ?></span>
+                                    </a>
+                                </form>
+                            <?php endif ?>
+                            <a href="<?php /* @escapeNotVerified */ echo $block->getViewUrl($_quote) ?>" class="action view">
+                                <span><?php /* @escapeNotVerified */ echo __('View Cart') ?></span>
+                            </a>
+                            <a href="<?php /* @escapeNotVerified */ echo $block->getPrintUrl($_quote) ?>" class="action print">
+                                <span><?php /* @escapeNotVerified */ echo __('Print') ?></span>
+                            </a>
+                            <?php if (!$block->isCurrent($_quote) || true) : ?>
+                                <form data-role="delete-cart-form" action="<?php /* @escapeNotVerified */ echo $block->getDeleteCartUrl($_quote); ?>" method="post" style="display: inline-block;">
+                                    <input type="hidden" name="quote_id" value="<?php /* @escapeNotVerified */ echo $_quote->getId() ?>">
+                                    <input type="hidden" name="cart_action" value="delete_cart">
+                                    <?php echo $block->getBlockHtml('formkey') ?>
+                                    <a href="#" title="<?php echo $block->escapeHtml(__('Delete')); ?>" class="action delete">
+                                        <span><?php echo $block->escapeHtml(__('Delete')) ?></span>
+                                    </a>
+                                </form>
+                            <?php endif ?>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+    <?php if ($block->getPagerHtml()): ?>
+        <div class="order-products-toolbar toolbar bottom"><?php echo $block->getPagerHtml(); ?></div>
+    <?php endif ?>
+    <script type="text/x-magento-init">
+        {
+            "[data-role=set-cart-form]": {
+                "setCart": {}
+            },
+            "[data-role=delete-cart-form]": {
+                "deleteCart": {
+                    "submitButton": ".delete"
+                }
+            }
+        }
+    </script>
+<?php else: ?>
+    <div class="message info empty"><span><?php /* @escapeNotVerified */ echo __('You have no saved carts.'); ?></span></div>
+<?php endif ?>

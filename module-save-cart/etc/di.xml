@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Vekeryk\SaveCart\Api\SaveCartRepositoryInterface" type="Vekeryk\SaveCart\Model\SaveCartRepository" />
+    <preference for="Vekeryk\SaveCart\Api\Data\SaveCartInterface" type="Vekeryk\SaveCart\Model\SaveCart" />
+    <type name="Magento\Quote\Api\CartRepositoryInterface">
+        <plugin name="saveCart_cartRepository" type="Vekeryk\SaveCart\Plugin\Quote\Api\CartRepository" />
+    </type>
+    <type name="Magento\Quote\Model\QuoteRepository\SaveHandler">
+        <plugin name="saveCart_cartRepository_saveHandler" type="Vekeryk\SaveCart\Plugin\Quote\Model\QuoteRepository\SaveHandler" />
+    </type>
+    <type name="Magento\Checkout\Model\Cart">
+        <plugin name="saveCart_checkout_model_cart" type="Vekeryk\SaveCart\Plugin\Checkout\Model\Cart" />
+    </type>
+    <type name="Magento\Quote\Model\ResourceModel\Quote">
+        <plugin name="saveCart_quote_resourcemodel_quote" type="Vekeryk\SaveCart\Plugin\Quote\Model\ResourceModel\Quote" />
+    </type>
+    <type name="Magento\Checkout\Block\Cart\AbstractCart">
+        <plugin name="saveCart_checkout_block_cart_abstractCart" type="Vekeryk\SaveCart\Plugin\Checkout\Block\Cart\AbstractCart" />
+    </type>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="savecart_quote_grid_data_source" xsi:type="string">Vekeryk\SaveCart\Model\ResourceModel\SaveCart\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

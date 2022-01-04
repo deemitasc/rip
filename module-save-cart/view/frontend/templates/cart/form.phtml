@@ -1,0 +1,89 @@
+<?php
+
+// @codingStandardsIgnoreFile
+
+/**  @var $block \Vekeryk\SaveCart\Block\Cart */
+
+$buttonTitle = ($block->getActionValue() == 'save') ? 'Save Shopping Cart' : 'Update Shopping Cart';
+?>
+<div><?php /* @escapeNotVerified */ echo __('If you would like to add new items to this cart, you need to add this cart to the main cart.') ?></div>
+<?php $mergedCells = ($this->helper('Magento\Tax\Helper\Data')->displayCartBothPrices() ? 2 : 1); ?>
+<?php echo $block->getChildHtml('form_before') ?>
+<form action="<?php /* @escapeNotVerified */ echo $block->getUrl('savecart/cart/updatePost') ?>"
+          method="post"
+          id="form-validate"
+          data-mage-init='{"validation":{}}'
+          class="form">
+    <?php echo $block->getBlockHtml('formkey'); ?>
+    <input name="quote_id" type="hidden" value="<?php echo $block->getQuote()->getId() ?>">
+    <div class="cart table-wrapper<?php echo $mergedCells == 2 ? ' detailed' : ''; ?>">
+        <table id="shopping-cart-table"
+               class="cart items data table"
+               data-mage-init='{"shoppingCart":{"emptyCartButton": "action.clear",
+               "updateCartActionContainer": "#update_cart_action_container"}}'>
+            <caption role="heading" aria-level="2" class="table-caption"><?php /* @escapeNotVerified */ echo __('Shopping Cart Items') ?></caption>
+            <thead>
+                <tr>
+                    <th class="col item" scope="col"><span><?php /* @escapeNotVerified */ echo __('Item') ?></span></th>
+                    <th class="col price" scope="col"><span><?php /* @escapeNotVerified */ echo __('Price') ?></span></th>
+                    <th class="col qty" scope="col"><span><?php /* @escapeNotVerified */ echo __('Qty') ?></span></th>
+                    <th class="col subtotal" scope="col"><span><?php /* @escapeNotVerified */ echo __('Subtotal') ?></span></th>
+                </tr>
+            </thead>
+            <?php foreach ($block->getItems() as $_item): ?>
+                <?php echo $block->getItemHtml($_item) ?>
+            <?php endforeach ?>
+            <tfoot>
+                <?php echo $block->getTotals(); ?>
+            </tfoot>
+        </table>
+    </div>
+    <fieldset class="fieldset">
+        <div class="field required">
+            <label class="label" for="cart-name">
+                <span><?php echo $block->escapeHtml(__('Cart Name / Job Name / PO Number')) ?></span>
+            </label>
+            <div class="control">
+                <input id="cart-<?php /* @escapeNotVerified */ echo $_item->getId() ?>-qty"
+                       name="cart[quote_name]"
+                       value="<?php /* @escapeNotVerified */ echo $block->getQuoteName() ?>"
+                       type="text"
+                       title="<?php echo $block->escapeHtml(__('Cart Name / Job Name / PO Number')); ?>"
+                       class="input-text"
+                       maxlength="255"
+                       data-validate="{required:true}"/>
+            </div>
+        </div>
+        <div class="field">
+            <label class="label" for="cart-comment">
+                <span><?php /* @escapeNotVerified */ echo __('Note') ?></span>
+            </label>
+            <div class="control">
+                <textarea id="cart-<?php /* @escapeNotVerified */ echo $_item->getId() ?>-qty"
+                       name="cart[quote_comment]"
+                       title="<?php echo $block->escapeHtml(__('Note')); ?>"
+                       class="input-text"><?php /* @escapeNotVerified */ echo $block->getQuoteComment() ?></textarea>
+            </div>
+        </div>
+    </fieldset>
+    <div class="cart main actions">
+        <?php /*if ($block->getContinueShoppingUrl()): ?>
+            <a class="action continue"
+               href="<?php echo $block->escapeUrl($block->getContinueShoppingUrl()) ?>"
+               title="<?php echo $block->escapeHtml(__('Continue Shopping')); ?>">
+                <span><?php / @escapeNotVerified / echo __('Continue Shopping') ?></span>
+            </a>
+        <?php endif;*/ ?>
+        <button type="submit"
+                name="update_cart_action"
+                value="<?php echo $block->getActionValue() ?>"
+                title="<?php echo $block->escapeHtml(__($buttonTitle)); ?>"
+                class="action update">
+            <span><?php /* @escapeNotVerified */ echo __($buttonTitle); ?></span>
+        </button>
+        <input type="hidden" value="" id="update_cart_action_container" data-cart-item-update=""/>
+    </div>
+</form>
+<?php echo $block->getChildHtml('checkout.cart.order.actions') ?>
+<?php echo $block->getChildHtml('shopping.cart.table.after'); ?>
+

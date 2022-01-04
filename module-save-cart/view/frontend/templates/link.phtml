@@ -1,0 +1,9 @@
+<?php
+
+// @codingStandardsIgnoreFile
+
+/* @var $block \Vekeryk\SaveCart\Block\Link */
+?>
+<li class="link savecart">
+    <a <?php /* @escapeNotVerified */ echo $block->getLinkAttributes() ?>><?php echo $block->escapeHtml($block->getLabel()) ?></a>
+</li>
