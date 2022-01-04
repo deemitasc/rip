@@ -16,7 +16,8 @@
     "require": {
         "php": "^7.2",
         "magento/framework": "*",
-        "ripenecommerce/magento2-current-statement": "^2.0",
+        "ripenecommerce/magento2-prophet21": "^3.0",
+        "ripenecommerce/magento2-simpleapps": "^2.0",
         "ripenecommerce/magento2-vantiv-integrated-payments": "^1.0"
     },
     "autoload": {
@@ -25,6 +26,20 @@
         ],
         "psr-4": {
             "Ripen\\PayMyBill\\": ""
+        }
+    },
+    "repositories": {
+        "prophet21": {
+            "type": "git",
+            "url": "git@bitbucket.org:ripenecom/magento2-prophet21.git"
+        },
+        "simple-apps": {
+            "type": "git",
+            "url": "git@bitbucket.org:ripenecom/magento2-simpleapps.git"
+        },
+        "vantiv-integrated-payments": {
+            "type": "git",
+            "url": "git@bitbucket.org:ripenecom/magento2-vantiv-integrated-payments.git"
         }
     }
 }
