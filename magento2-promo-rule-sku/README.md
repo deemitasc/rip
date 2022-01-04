@@ -1,9 +1,10 @@
 Magento 2 - Promo Rule Sku
 ==================
-A module for adding a Rule Sku field to Catalog Price Rules and Cart Price Rules. 
-The value is set on Admin. If one of the promo rules is applied to the order, rule_sku value 
-is passed to P21 during the order export. 
 
-Installation via composer: 
-    composer require ripenecommerce/magento2-promo-rule-sku
-    
+## Overview
+
+This module adds a `rule_sku` field to the admin that can be set when creating/managing catalog and cart price rules. Alone this module does not accomplish anything, as it does do anything with the data saved in this field. It is intended as a support for the `Ripen_Prophet21` module, which uses this field as the SKU to represent the given promotion when it transfers promotion discounts as negative-value line items.
+
+## TODO
+
+This module does not necessarily make sense as an independent module and ideally would be merged into `Ripen_Prophet21`.
