@@ -1,0 +1,97 @@
+.invoice-container {
+    width: 80%;
+    margin: 20px auto 0;
+}
+
+.invoice-title {
+    margin: 0 0 0 50%;
+}
+
+.box {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.box--full {
+    margin: 0 0 20px;
+    width: 100%;
+}
+
+.box--half {
+    margin: 0 0 20px;
+    flex: 0 0 50%;
+}
+
+.box--half.sub {
+    margin: 0;
+}
+
+.table-header {
+    background-color: #f6f6f6;
+    border: 1px solid #efefef;
+}
+.table-content {
+    border: 1px solid #efefef;
+}
+
+.invoice-details-outer {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.invoice-details {
+    width:100%;
+    min-width: 768px;
+}
+
+.invoice-details td,
+.invoice-details th,
+.invoice-items td,
+.invoice-items th {
+    padding: 5px;
+}
+.invoice-items .invoice-item-id {
+    font-weight: bold;
+}
+
+.invoice-items .invoice-item-name {
+    font-size: 10px;
+}
+
+.totals-wrapper {
+    display: block;
+    width: 100%;
+}
+.totals {
+    background-color: #f6f6f6;
+    border: 1px solid #efefef;
+    padding: 5px;
+    width: 80%;
+    float: right;
+}
+.totals .total-line {
+    display: flex;
+}
+.totals .total-label {
+    text-align: right;
+    width: 50%;
+    padding-right: 5px;
+}
+.totals .total-amount {
+    text-align: left;
+    width: 50%;
+    padding-left: 5px;
+    font-weight: bold;
+}
+
+@media (min-width: 480px) {
+    .totals {
+        width: 60%;
+    }
+}
+
+@media (min-width: 768px) {
+    .totals {
+        width: 40%;
+    }
+}

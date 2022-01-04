@@ -1,0 +1,145 @@
+<?php
+/** @var Ripen\CurrentStatement\Block\CurrentStatement $block */
+
+/** @var \Ripen\CurrentStatement\Helper\CurrentStatement $statementHelper */
+$statementHelper = $this->helper('Ripen\CurrentStatement\Helper\CurrentStatement');
+$invoice = $statementHelper->getInvoice($this->getRequest()->getParam('invoice_no'));
+$lineItems = $statementHelper->getInvoiceLines($invoice['invoice_no']);
+$order = $statementHelper->getOrder($invoice);
+$pickTicket = $statementHelper->getPickTicket($invoice);
+$webOrderNumber = $statementHelper->getOrderIncrementId($invoice['order_no']);
+?>
+<div class="invoice-container box">
+    <div class="box--full">
+        <h2 class="invoice-title">INVOICE</h2>
+    </div>
+    <div class="box--half remit-to">
+        <h4>Remit To</h4>
+        <?php echo $block->getStoreAddress(); ?>
+    </div>
+    <div class="box--half invoice-overview">
+        <div class="box">
+            <div class="box--half sub">Invoice #:</div>
+            <div class="box--half sub"><?= $invoice['invoice_no'] ?></div>
+            <div class="box--half sub">Date:</div>
+            <div class="box--half sub"><?= date('m/d/Y', strtotime($invoice['invoice_date'])) ?></div>
+            <div class="box--half sub">ERP Order #: </div>
+            <div class="box--half sub"><?= $invoice['order_no'] ?></div>
+            <div class="box--half sub">Web Order #: </div>
+            <div class="box--half sub"><?= $webOrderNumber ?></div>
+        </div>
+    </div>
+    <div class="box--half bill-to">
+        <h4>Bill To</h4>
+        <?= $invoice['bill2_name'];?><br/>
+        <?= $invoice['bill2_address1'];?><br/>
+        <?= $invoice['bill2_address2'] ? "{$invoice['bill2_address2']}<br/>" : '';?>
+        <?= $invoice['bill2_city'];?> <?= $invoice['bill2_state'];?> <?= $invoice['bill2_postal_code'];?><br/>
+        <?= $invoice['bill2_country'];?><br/>
+    </div>
+    <div class="box--half ship-to">
+        <h4>Ship To</h4>
+        <?= $invoice['ship2_name'];?><br/>
+        <?= $invoice['ship2_address1'];?><br/>
+        <?= $invoice['ship2_address2'] ? "{$invoice['ship2_address2']}<br/>" : '';?>
+        <?= $invoice['ship2_city'];?> <?= $invoice['ship2_state'];?> <?= $invoice['ship2_postal_code'];?><br/>
+        <?= $invoice['ship2_country'];?><br/>
+    </div>
+    <div class="box--half customer">
+        <h4>Customer ID</h4>
+        <?= $statementHelper->getCustomerCode(); ?>
+    </div>
+    <div class="box--half carrier">
+        <div class="box">
+            <div class="box--half sub">Carrier:</div>
+            <div class="box--half sub"><?= $invoice['carrier_name'] ?></div>
+            <div class="box--half sub">Tracking Info:</div>
+            <div class="box--half sub"><?= $statementHelper->getPickTicketTracking($pickTicket) ?? '-' ?></div>
+            <div class="box--half sub">Delivery Instr: </div>
+            <div class="box--half sub"><?= !empty($pickTicket['instructions']) ? $pickTicket['instructions'] : '-'?></div>
+        </div>
+    </div>
+
+    <div class="invoice-details-outer">
+        <table class="box--full invoice-details">
+            <tr class="table-header">
+                <th>PO Number</th>
+                <th>Terms Description</th>
+                <th>Net Due Date</th>
+                <th>Disc Due Date</th>
+                <th>Discount Amount</th>
+            </tr>
+            <tr class="table-content">
+                <td><?= $invoice['po_no'] ?></td>
+                <td><?= $invoice['terms_desc'] ?></td>
+                <td><?= date('m/d/Y', strtotime($invoice['net_due_date'])) ?></td>
+                <td><?= date('m/d/Y', strtotime($invoice['terms_due_date'])) ?></td>
+                <td><?= $invoice['terms_amount'] ? $invoice['terms_amount'] : '--' ?></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="invoice-details-outer">
+        <table class="box--full invoice-details">
+            <tr class="table-header">
+                <th>Order Date</th>
+                <th>Pick Ticket No</th>
+                <th>Taker</th>
+            </tr>
+            <tr class="table-content">
+                <td><?= date('m/d/Y', strtotime($invoice['order_no'])) ?></td>
+                <td><?= !empty($pickTicket['pick_ticket_no']) ? $pickTicket['pick_ticket_no'] : '-' ?></td>
+                <td><?= !empty($order['taker']) ? $order['taker'] : '-' ?></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="invoice-details-outer">
+        <table class="box--full invoice-items">
+            <tr class="table-header">
+                <th>Ordered</th>
+                <th>Shipped</th>
+                <th>Remaining</th>
+                <th>UOM</th>
+                <th>Disp</th>
+                <th>Item ID</th>
+                <th>Unit Price</th>
+                <th>Ext Price</th>
+            </tr>
+            <?php foreach ($lineItems as $lineItem) :?>
+            <tr class="table-content">
+                <td><?= $lineItem['qty_requested'] ?></td>
+                <td><?= $lineItem['qty_shipped'] ?></td>
+                <td><?= ($lineItem['qty_requested'] - $lineItem['qty_shipped']) ?></td>
+                <td><?= $lineItem['unit_of_measure'] ?></td>
+                <td></td>
+                <td>
+                    <div class="invoice-item-id"><?= $lineItem['item_id'] ?></div>
+                    <div class="invoice-item-name"><?= $lineItem['item_desc'] ?></div>
+                </td>
+                <td><?= $statementHelper->formatAccountingAmount($lineItem['unit_price']) ?></td>
+                <td><?= $statementHelper->formatAccountingAmount($lineItem['extended_price']) ?></td>
+            </tr>
+            <?php endforeach; ?>
+        </table>
+    </div>
+
+    <div class="box--full totals-wrapper">
+        <div class="totals">
+            <div class="total-line clearfix">
+                <div class="total-label">Subtotal:</div>
+                <div class="total-amount">
+                    <?= $statementHelper->formatAccountingAmount(($invoice['total_amount'] - $invoice['tax_amount'])) ?>
+                </div>
+            </div>
+            <div class="total-line clearfix">
+                <div class="total-label">Tax:</div>
+                <div class="total-amount"><?= $statementHelper->formatAccountingAmount($invoice['tax_amount']) ?></div>
+            </div>
+            <div class="total-line clearfix">
+                <div class="total-label">Amount Due:</div>
+                <div class="total-amount"><?= $statementHelper->formatAccountingAmount($invoice['total_amount']) ?></div>
+            </div>
+        </div>
+    </div>
+</div>

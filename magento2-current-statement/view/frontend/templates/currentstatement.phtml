@@ -1,0 +1,166 @@
+<?php
+/** @var Ripen\CurrentStatement\Block\CurrentStatement $block */
+
+/** @var Ripen\CurrentStatement\Helper\CurrentStatement $statementHelper */
+$statementHelper = $this->helper('Ripen\CurrentStatement\Helper\CurrentStatement');
+
+$paymentFilter = strtolower($block->getRequest()->getParam($statementHelper::FILTER_PAYMENT_PARAM));
+$invoices = $block->getInvoices();
+$firstInvoice =  current($invoices);
+$totals = $block->getTotals($invoices);
+?>
+
+<h3>Overview & Details</h3>
+<div class="overview">
+    <div class="wrapper">
+        <span>Remit To:</span><br/>
+        <?php echo $block->getStoreAddress(); ?>
+    </div>
+    <div class="wrapper">
+        <span>To:</span><br>
+        <?= $firstInvoice['bill2_name'];?><br/>
+        <?= $firstInvoice['bill2_address1'];?><br/>
+        <?= !$firstInvoice['bill2_address2'] ? '' : $firstInvoice['bill2_address2'] . "<br/>";?>
+        <?= $firstInvoice['bill2_city'];?> <?= $firstInvoice['bill2_state'];?> <?= $firstInvoice['bill2_postal_code'];?><br/>
+        <?= $firstInvoice['bill2_country'];?><br/>
+    </div>
+    <div class="wrapper">
+        <span>Statement Date:</span><br>
+        <?php echo date('m/d/Y', strtotime('+ 1 day', time())); ?>
+    </div>
+    <div class="wrapper">
+        <span>Customer Code:</span><br>
+        <?php echo $statementHelper->getCustomerCode(); ?>
+    </div>
+</div>
+
+<form action="">
+    <div class="main filters">
+        <div class="field-full-row">
+            <h4>Payment Status:</h4>
+            <div class="control radio-list">
+                <label>
+                    <input type="radio" class="input-text" value="n" name="<?= $statementHelper::FILTER_PAYMENT_PARAM ?>" value="n"<?= (empty($paymentFilter) || $paymentFilter == 'n') ? ' checked' : ''?>/> <span>View Unpaid Invoices</span>
+                </label>
+                <label>
+                    <input type="radio" class="input-text" value="y" name="<?= $statementHelper::FILTER_PAYMENT_PARAM ?>" value="n"<?= ($paymentFilter == 'y') ? ' checked' : ''?>/> <span>View Paid Invoices</span>
+                </label>
+                <label>
+                    <input type="radio" class="input-text" value="both" name="<?= $statementHelper::FILTER_PAYMENT_PARAM ?>" value="n"<?= ($paymentFilter == 'both') ? ' checked' : ''?>/> <span>View Paid &amp; Unpaid Invoices</span>
+                </label>
+            </div>
+        </div>
+        <div class="field-full-row">
+            <h4>Invoice Date:</h4>
+        </div>
+        <div class="field-inline">
+            <div class="field form-inline">
+                <label>From: </label>
+                <div class="control">
+                    <input type="text" class="input-text order-filter-date" id="order_filter_from_date" autocomplete="off" name="<?= $statementHelper::FILTER_FROM_DATE_PARAM ?>" value="<?php echo $this->getRequest()->getParam($statementHelper::FILTER_FROM_DATE_PARAM);?>" />
+                    <span class="field-icon fa fa-calendar" aria-hidden="true"></span>
+                </div>
+            </div>
+
+            <div class="field form-inline">
+                <label>To: </label>
+                <div class="control">
+                    <input type="text" class="input-text order-filter-date" id="order_filter_to_date" autocomplete="off" name="<?= $statementHelper::FILTER_TO_DATE_PARAM ?>" value="<?php echo $this->getRequest()->getParam($statementHelper::FILTER_TO_DATE_PARAM);?>" />
+                    <span class="field-icon fa fa-calendar" aria-hidden="true"></span>
+                </div>
+            </div>
+
+            <div class="field-form-action">
+                <button class="action primary" type="submit">
+                    <span>Apply Filters</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="main actions">
+    <button class="button action primary" data-url="<?php echo $block->getExportUrl(); ?>" title="Export to CSV">
+        <span>Export to CSV</span>
+    </button>
+</div>
+
+<div class="open-invoices-outer">
+    <table class="open-invoices">
+        <tr class="open-invoice-header">
+            <td>Inv Number</td>
+            <td>ERP Order Number</td>
+            <td>Web Order Number</td>
+            <td>Paid in Full?</td>
+            <td>Inv Date</td>
+            <td>Due Date</td>
+            <td>PO Number</td>
+            <td>Inv Amount</td>
+            <td>Open Amount</td>
+            <?php echo $block->getChildHtml('payment_header'); ?>
+        </tr>
+        <?php if ($invoices): ?>
+            <?php foreach ($invoices as $invoice): ?>
+                <?php $openAmount = $statementHelper->getOpenAmount($invoice); ?>
+                <tr class="open-invoice <?= ($openAmount < 0) ? "accent" : ''; ?>">
+                    <td><a href="<?= $block->getInvoiceUrl($invoice['invoice_no']) ?>" target="_blank"><?= $invoice['invoice_no'] ?></a></td>
+                    <td><?= $invoice['order_no'] ?></td>
+                    <td><?= $invoice['increment_id'] ?></td>
+                    <td><?= $invoice['paid_in_full_flag'] ?></td>
+                    <td><?= date('m/d/Y', strtotime($invoice['invoice_date'])) ?></td>
+                    <td><?= date('m/d/Y', strtotime($invoice['terms_due_date'])) ?></td>
+                    <td><?= $invoice['po_no'] ?></td>
+                    <td><?= $statementHelper->formatAccountingAmount($invoice['total_amount']); ?></td>
+                    <td><?= $statementHelper->formatAccountingAmount($statementHelper->getOpenAmount($invoice)) ?></td>
+                    <?php if($this->getLayout()->getBlock('payment_checkbox')):?>
+                        <?= $this->getLayout()->getBlock('payment_checkbox')->setInvoice($invoice)->toHtml(); ?>
+                    <?php endif; ?>
+
+                </tr>
+            <?php endforeach; ?>
+        <?php endif; ?>
+    </table>
+</div>
+<?php echo $block->getChildHtml('payment_form'); ?>
+<div class="totals">
+    <div class="total-line clearfix">
+        <div class="total-label">Current:</div>
+        <div class="total-amount"><?= $statementHelper->formatAccountingAmount($totals['current']) ?></div>
+    </div>
+    <div class="total-line clearfix">
+        <div class="total-label">Past Due:</div>
+        <div class="total-amount"><?= $statementHelper->formatAccountingAmount($totals['past_due']) ?></div>
+    </div>
+    <div class="total-line clearfix">
+        <div class="total-label">Past Due (31-60):</div>
+        <div class="total-amount"><?= $statementHelper->formatAccountingAmount($totals['past_due_30']) ?></div>
+    </div>
+    <div class="total-line clearfix">
+        <div class="total-label">Past Due (Over 60):</div>
+        <div class="total-amount"><?= $statementHelper->formatAccountingAmount($totals['past_due_60']) ?></div>
+    </div>
+    <div class="total-line clearfix">
+        <div class="total-label">Total Due:</div>
+        <div class="total-amount"><?= $statementHelper->formatAccountingAmount($totals['total_due']) ?></div>
+    </div>
+</div>
+
+<script>
+    require([
+        'jquery',
+        'mage/translate',
+        'mage/calendar'
+    ], function ($, $t) {
+        $('.order-filter-date').calendar({
+            changeMonth: true,
+            changeYear: true,
+            showButtonPanel: true,
+            currentText: $t('Go Today'),
+            closeText: $t('Close'),
+            showWeek: true
+        });
+        $('.main .actions button.action').click(function(){
+            window.location.href = $(this).data('url');
+        });
+    })
+</script>

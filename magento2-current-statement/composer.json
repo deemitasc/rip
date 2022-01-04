@@ -1,0 +1,46 @@
+{
+    "name": "ripenecommerce/magento2-current-statement",
+    "description": "Current Statement for Magento 2",
+    "type": "magento2-module",
+    "authors": [
+        {
+            "name": "Misha Medvedev",
+            "email": "mmedvedev@ripen.com",
+            "homepage": "http://ripen.com",
+            "role": "Developer"
+        },
+        {
+            "name": "Scott Buchanan",
+            "email": "sbuchanan@ripen.com",
+            "homepage": "https://ripen.com",
+            "role": "Developer"
+        }
+    ],
+    "license": [
+        "Proprietary"
+    ],
+    "require": {
+        "php": "^7.2",
+        "magento/framework": "*",
+        "ripenecommerce/magento2-prophet21": "^3.0",
+        "ripenecommerce/magento2-simpleapps": "^2.0"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Ripen\\CurrentStatement\\": ""
+        }
+    },
+    "repositories": {
+        "prophet21": {
+            "type": "git",
+            "url": "git@bitbucket.org:ripenecom/magento2-prophet21.git"
+        },
+        "simple-apps": {
+            "type": "git",
+            "url": "git@bitbucket.org:ripenecom/magento2-simpleapps.git"
+        }
+    }
+}

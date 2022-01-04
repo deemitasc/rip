@@ -1,0 +1,13 @@
+<page  layout="empty" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="customer_account"/>
+    <head>
+        <title>Invoice</title>
+        <css src="Ripen_CurrentStatement::css/invoice.css"/>
+    </head>
+    <body>
+        <container name="root" label="Root">
+            <block class="Ripen\CurrentStatement\Block\CurrentStatement" name="p21invoice" template="Ripen_CurrentStatement::invoice.phtml" cacheable="false"/>
+        </container>
+        <referenceContainer name="footer" remove="true" />
+    </body>
+</page>

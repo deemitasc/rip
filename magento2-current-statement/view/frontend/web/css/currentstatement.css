@@ -1,0 +1,207 @@
+.main.filters {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin-bottom: 2rem;
+    border: 1px solid #eee;
+    padding: 1rem;
+}
+
+.main.filters .field,
+.main.filters .field-full-row,
+.main.filters .field-form-action {
+    position: relative;
+    flex-basis: 100%;
+}
+.main.filters .field-full-row {
+    padding-top: 8px;
+}
+.main.filters .field label {
+    width: 50px;
+}
+
+.main.filters .field .control {
+    font-size: 15px;
+    width: 100%;
+}
+
+.main.filters .radio-list,
+.main.filters .radio-list label {
+    display: flex;
+    align-items: center;
+}
+
+.main.filters .radio-list label span {
+    margin: auto 0.5rem;
+}
+
+.main.field .control input {
+    color: #666666;
+    background: #ffffff;
+}
+
+.main.filters .field.form-inline {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.main.filters .field-inline {
+    width:100%;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.main.filters .field.form-inline .control input,
+.main.filters .field.form-inline .control select,
+.main.filters .field.form-inline .control textarea {
+    width: 100%;
+}
+
+.main.filters .field .field-icon {
+    position: absolute;
+    top: 25px;
+    right: 10px;
+    font-size: 1.25rem;
+}
+
+.main.actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.open-invoices-outer {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.open-invoices {
+    width:100%;
+    min-width: 768px;
+}
+
+.open-invoices td {
+    padding: 5px 5px;
+}
+
+.open-invoice-header {
+    font-weight: bold;
+}
+
+.open-invoice {
+    border-bottom: 1px solid #efefef;
+}
+
+.open-invoice.accent {
+    background-color: #ffefd2;
+}
+
+.overview {
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: row;
+    -webkit-flex-direction: row;
+    flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+    width: auto;
+    max-width: 100%;
+    padding: 15px;
+    margin-bottom: 40px;
+    border: 1px solid #efefef;
+    background-color: #f6f6f6;
+}
+
+.overview .wrapper {
+    width: 50%;
+}
+
+.overview .wrapper:nth-child(-n + 2) {
+    margin-bottom: 20px;
+}
+
+.overview .wrapper span {
+    font-weight: bold;
+}
+
+.totals {
+    margin-top: 20px;
+    background-color: #f6f6f6;
+    border: 1px solid #efefef;
+    padding: 5px;
+    width: 80%;
+    float: right;
+}
+
+.totals .total-line.clearfix:before,
+.totals .total-line.clearfix:after {
+    display: table;
+    content: "";
+    line-height: 0;
+}
+.totals .total-line.clearfix:after {
+    content: " ";
+    visibility: hidden;
+    display: block;
+    height: 0;
+    clear: both;
+}
+.totals .total-line {
+    display: flex;
+}
+.totals .total-label {
+    text-align: right;
+    width: 50%;
+    padding-right: 5px;
+}
+.totals .total-amount {
+    text-align: left;
+    width: 50%;
+    padding-left: 5px;
+    font-weight: bold;
+}
+
+@media (min-width: 480px) {
+    .totals {
+        width: 60%;
+    }
+}
+
+@media (min-width: 768px) {
+    .main.filters .field .control {
+        width: auto;
+    }
+    .main.filters .field.form-inline .control input,
+    .main.filters .field.form-inline .control select,
+    .main.filters .field.form-inline .control textarea {
+        width: auto;
+    }
+    .main.filters .field {
+        flex-basis: auto;
+        margin-right: 1%;
+    }
+    .main.filters .field-form-action {
+        flex-basis: auto;
+    }
+    .main.filters .field-inline {
+        justify-content: flex-start;
+    }
+    .main.filters .field.form-inline {
+        justify-content: flex-start;
+    }
+    .main.filters .field-form-action {
+        flex-basis: auto;
+        margin-left: 5px;
+    }
+    .overview .wrapper {
+        width: 25%;
+    }
+    .overview .wrapper:nth-child(-n + 2) {
+        margin-bottom: 0;
+    }
+    .totals {
+        width: 40%;
+    }
+}

@@ -1,0 +1,12 @@
+<page  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="customer_account"/>
+    <head>
+        <title>Invoices &amp; Statements</title>
+        <css src="Ripen_CurrentStatement::css/currentstatement.css"/>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Ripen\CurrentStatement\Block\CurrentStatement" name="currentstatement" template="Ripen_CurrentStatement::currentstatement.phtml" cacheable="false"/>
+        </referenceContainer>
+    </body>
+</page>
