@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <block class="Magento\Backend\Block\Template" name="order_comments" template="Ripen_OrderCustomAttributes::order/view/comments.phtml" />
+        <block class="Magento\Backend\Block\Template" name="order_po_number" template="Ripen_OrderCustomAttributes::order/view/po_number.phtml" />
+        <block class="Magento\Backend\Block\Template" name="order_ship_entire_only" template="Ripen_OrderCustomAttributes::order/view/ship_entire_only.phtml" />
+
+    </body>
+</page>

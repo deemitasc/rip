@@ -1,0 +1,19 @@
+<div data-bind="visible: canVisibleBlock">
+    <div class="opc-shipping-additional">
+        <div class="payment-option-content" data-role="content">
+            <form class="form form-discount form-show-label" id="po-number-form">
+                <div class="payment-option-inner">
+                    <div class="field" data-bind="css: { required: isPoNumberRequired }">
+                        <label class="label" for="po_number">
+                            <span data-bind="i18n: 'PO Number'"></span>
+                        </label>
+                        <div class="control">
+                            <input type="text" class="input-text" id="po_number" name="po_number" maxlength="255"
+                                data-bind="value: window.checkoutConfig.quoteData.po_number, attr:{placeholder: $t('Enter PO Number'), required: isPoNumberRequired} " />
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

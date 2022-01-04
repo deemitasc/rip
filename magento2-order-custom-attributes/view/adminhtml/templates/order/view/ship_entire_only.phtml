@@ -1,0 +1,10 @@
+<?php if($shipEntireOnly = $block->getOrderShipEntireOnly()):?>
+    <section class="admin__page-section">
+        <div class="admin__page-section-title">
+            <span class="title"><?php echo __('Ship Only Complete Order') ?></span>
+        </div>
+        <div class="admin__page-section-content">
+            <?php echo $block->escapeHtml($shipEntireOnly);?>
+        </div>
+    </section>
+<?php endif; ?>

@@ -1,0 +1,18 @@
+<div data-bind="visible: canVisibleBlock">
+    <div class="opc-shipping-additional">
+        <div class="payment-option-content" data-role="content">
+            <form class="form form-discount" id="ship-entire-only-form">
+                <div class="payment-option-inner">
+                    <div class="field">
+                        <div class="control">
+                            <label>
+                                <input type="checkbox" value="1" id="ship_entire_only" name="ship_entire_only" data-bind="checked: Number(window.checkoutConfig.quoteData.ship_entire_only)">&nbsp;
+                                Ship Complete Order Only
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

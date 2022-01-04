@@ -1,0 +1,18 @@
+<div data-bind="visible: canVisibleBlock">
+    <div class="opc-shipping-additional">
+        <div class="payment-option-content">
+            <form class="form form-discount form-show-label" id="comment-form">
+                <div class="payment-option-inner">
+                    <div class="field">
+                        <label class="label" for="comments">
+                            <span data-bind="i18n: 'Special Instructions'"></span>
+                        </label>
+                        <div class="control">
+                            <textarea class="input-text" id="comments" name="comments" rows="2" maxlength="200" data-bind="value: window.checkoutConfig.quoteData.comments, attr:{placeholder: $t('Enter Special Instructions Here')} " ></textarea>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

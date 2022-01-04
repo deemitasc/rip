@@ -1,0 +1,23 @@
+{
+    "quote": {
+        "column": {
+            "po_number": true,
+            "comments": true,
+            "ship_entire_only": true
+        }
+    },
+    "sales_order": {
+        "column": {
+            "po_number": true,
+            "comments": true,
+            "ship_entire_only": true
+        }
+    },
+    "sales_order_grid": {
+        "column": {
+            "po_number": true,
+            "comments": true,
+            "ship_entire_only": true
+        }
+    }
+}

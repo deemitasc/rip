@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="checkout.root">
+            <arguments>
+                <argument name="jsLayout" xsi:type="array">
+                    <item name="components" xsi:type="array">
+                        <item name="checkout" xsi:type="array">
+                            <item name="children" xsi:type="array">
+                                <item name="steps" xsi:type="array">
+                                    <item name="children" xsi:type="array">
+                                        <item name="shipping-step" xsi:type="array">
+                                            <item name="children" xsi:type="array">
+                                                <item name="shippingAddress" xsi:type="array">
+                                                    <item name="children" xsi:type="array">
+                                                        <item name="shippingAdditional" xsi:type="array">
+                                                            <item name="component" xsi:type="string">uiComponent</item>
+                                                            <item name="displayArea" xsi:type="string">shippingAdditional</item>
+                                                            <item name="children" xsi:type="array">
+                                                                <item name="ship_entire_only" xsi:type="array">
+                                                                    <item name="component" xsi:type="string">Ripen_OrderCustomAttributes/js/view/checkout/shipping/additional-block-ship-entire-only</item>
+                                                                </item>
+                                                                <item name="po_number" xsi:type="array">
+                                                                    <item name="component" xsi:type="string">Ripen_OrderCustomAttributes/js/view/checkout/shipping/additional-block-po-number</item>
+                                                                </item>
+                                                                <item name="comment" xsi:type="array">
+                                                                    <item name="component" xsi:type="string">Ripen_OrderCustomAttributes/js/view/checkout/shipping/additional-block-comment</item>
+                                                                </item>
+                                                                <item name="info" xsi:type="array">
+                                                                    <item name="component" xsi:type="string">Ripen_OrderCustomAttributes/js/view/checkout/shipping/additional-block-info</item>
+                                                                </item>
+                                                            </item>
+                                                        </item>
+                                                    </item>
+                                                </item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+            </arguments>
+        </referenceBlock>
+    </body>
+</page>
