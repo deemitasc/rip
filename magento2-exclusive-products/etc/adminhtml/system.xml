@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="catalog">
+            <resource>Magento_Catalog::config_catalog</resource>
+            <group id="exclusive_products" translate="label" type="text" sortOrder="500" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Product Exclusivity Settings</label>
+                <field id="customer_id_attribute" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Customer Identification Code</label>
+                    <comment><![CDATA[
+                        Customer EAV Attribute Code that uniquely identifies the current customer. Defaults to customer entity ID if empty.
+                    ]]></comment>
+                    <config_path>catalog/exclusive_products/customer_id_attribute</config_path>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

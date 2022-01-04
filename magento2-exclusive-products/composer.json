@@ -1,0 +1,40 @@
+{
+    "name": "ripenecommerce/magento2-exclusive-products",
+    "description": "Product protection layer for Magento 2",
+    "type": "magento2-module",
+    "authors": [
+        {
+            "name": "Jim Chao",
+            "email": "jchao@ripen.com",
+            "homepage": "http://ripen.com",
+            "role": "Developer"
+        },
+        {
+            "name": "Scott Buchanan",
+            "email": "sbuchanan@ripen.com",
+            "homepage": "https://ripen.com",
+            "role": "Developer"
+        }
+    ],
+    "license": [
+        "Proprietary"
+    ],
+    "require": {
+        "php": "^7.2",
+        "magento/framework": "*"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Ripen\\ExclusiveProducts\\": ""
+        }
+    },
+    "repositories": {
+        "simple-apps": {
+            "type": "vcs",
+            "url": "git@bitbucket.org:ripenecom/magento2-exclusive-products.git"
+        }
+    }
+}
