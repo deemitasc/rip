@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <pim>
+            <sync>
+                <data_sync_schedule>0 * * * *</data_sync_schedule>
+                <enable_images_sync>1</enable_images_sync>
+                <enable_pdf_sync>1</enable_pdf_sync>
+                <days_to_sync>1</days_to_sync>
+            </sync>
+            <email_alerts>
+                <threshold>ERROR</threshold>
+                <order_export_check>
+                    <cron_schedule>20 */2 * * *</cron_schedule>
+                    <threshold>30</threshold>
+                    <window>240</window>
+                </order_export_check>
+            </email_alerts>
+        </pim>
+    </default>
+</config>

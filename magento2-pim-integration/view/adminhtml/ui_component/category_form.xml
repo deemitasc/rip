@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <fieldset name="pim_attributes" sortOrder="40">
+        <settings>
+            <collapsible>true</collapsible>
+            <label translate="true">PIM Category Attributes</label>
+        </settings>
+        <field name="pim_category_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="label" xsi:type="string" translate="true">PIM Category Id</item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+</form>

@@ -1,0 +1,28 @@
+{
+    "name": "ripenecommerce/magento2-pim-integration",
+    "description": "PIM integration for Magento 2",
+    "type": "magento2-module",
+    "authors": [
+        {
+            "name": "Misha Medvedev",
+            "email": "mmedvedev@ripen.com",
+            "homepage": "http://ripen.com",
+            "role": "Developer"
+        }
+    ],
+    "license": [
+        "Proprietary"
+    ],
+    "require": {
+        "php": "^7.2",
+        "magento/framework": "*"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Ripen\\PimIntegration\\": ""
+        }
+    }
+}

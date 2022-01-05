@@ -1,0 +1,116 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="pim" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>PIM Integration</label>
+            <tab>service</tab>
+            <resource>Ripen_PimIntegration::config_pim</resource>
+            <group id="sync" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Data Sync</label>
+                <field id="enable_data_sync" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable Data Sync</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="data_sync_schedule" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Cron Schedule</label>
+                    <validate>required-entry</validate>
+                </field>
+                <field id="enable_product_sync" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable Products Update</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="days_to_sync" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Days to Sync</label>
+                    <comment>Run sync on products updated since this many days ago. Leaving this feild blank will run sync for all products.</comment>
+                    <depends>
+                        <field id="enable_product_sync">1</field>
+                    </depends>
+                </field>
+                <field id="force_update" translate="label" type="select" sortOrder="18" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Force Update Product</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Update product even if the timestamp since last update didn't change.</comment>
+                    <depends>
+                        <field id="enable_product_sync">1</field>
+                    </depends>
+                </field>
+                <field id="individual_product_sku_sync" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Product Restriction</label>
+                    <comment>Specific product SKU to limit import to.</comment>
+                    <depends>
+                        <field id="enable_product_sync">1</field>
+                    </depends>
+                </field>
+                <field id="product_import_limit" translate="label" type="text" sortOrder="22" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Product Sync Limit</label>
+                    <comment>Limit product sync to that many products</comment>
+                    <depends>
+                        <field id="enable_product_sync">1</field>
+                    </depends>
+                </field>
+                <field id="sync_active_only" translate="label" type="select" sortOrder="24" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Sync Active Only Products</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enable_product_sync">1</field>
+                    </depends>
+                </field>
+                <field id="magento_attribute_prefix" translate="label" type="text" sortOrder="28" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Magento Attribute Prefix</label>
+                </field>
+                <field id="enable_attribute_sync" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable Attributes Update</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="pim_ignored_attribute_properties" translate="label" type="text" sortOrder="45" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Attribute Properties to Manage in Magento</label>
+                    <comment>Attribute properties that will not be synced from PIM past initial attribute creation (comma separated).</comment>
+                    <depends>
+                        <field id="enable_attribute_sync">1</field>
+                    </depends>
+                </field>
+                <field id="enable_category_sync" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable Categories Update</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="pim_ignored_category_ids" translate="label" type="text" sortOrder="52" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Ignore category IDs</label>
+                    <comment>Comma delimited list of PIM category IDs to ignore</comment>
+                    <depends>
+                        <field id="enable_category_sync">1</field>
+                    </depends>
+                </field>
+                <field id="top_level_pim_category_id" translate="label" type="text" sortOrder="54" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Top level Catsy category ID</label>
+                    <validate>required-entry</validate>
+                    <depends>
+                        <field id="enable_category_sync">1</field>
+                    </depends>
+                </field>
+                <field id="enable_images_sync" translate="label" type="select" sortOrder="60" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable Images Update</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="enable_pdf_sync" translate="label" type="select" sortOrder="70" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable PDF Update</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="email_alerts" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Email Alerts</label>
+                <group id="error" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Log Alerts</label>
+                    <field id="recipients" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                        <label>Notification Recipients</label>
+                        <comment>Comma-delimited list of email addresses</comment>
+                    </field>
+                    <field id="threshold" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                        <label>Notification Threshold</label>
+                        <comment>Send notifications by email for logs of this level and above</comment>
+                        <source_model>Ripen\PimIntegration\Model\Config\LogLevels</source_model>
+                    </field>
+                </group>
+            </group>
+        </section>
+    </system>
+</config>
