@@ -114,7 +114,7 @@ class Api
     /**
      * Overloading method to handle the majority of the expected endpoint calls to the API that do not have a specific
      * method defined in this class
-     * 
+     *
      * TODO: Identify all uses of this method, convert to regular methods, and then remove this handler.
      *
      * @deprecated
@@ -287,6 +287,18 @@ class Api
 
         // Note, this api call returns data sorted by modification_date
         $response = $this->api->makeHttpRequest('GET', "ecommerce/items/all/links", $params);
+        return !empty($response['data']) ? $response['data'] : [];
+    }
+
+    /**
+     * @param strng|int $id
+     * @param array $params
+     * @return array
+     * @throws P21ApiException
+     */
+    public function getItemUoms($id, $params = [])
+    {
+        $response = $this->makeHttpRequest('GET', '/ecommerce/items/' . urlencode($id) . '/uom', $params);
         return !empty($response['data']) ? $response['data'] : [];
     }
 
@@ -536,19 +548,25 @@ class Api
     /**
      * @param $id
      * @param array $params
-     * @return array|null
+     * @return array
      * @throws P21ApiException
      */
     public function getSalesRepCustomers($id, $params = [])
     {
         $response = $this->makeHttpRequest('GET', "/ecommerce/salesreps/{$id}/customers", $params);
-        return !empty($response['data']) ? $response['data'] : null;
+        return !empty($response['data']) ? $response['data'] : [];
     }
 
+    /**
+     * @param $id
+     * @param array $params
+     * @return array
+     * @throws P21ApiException
+     */
     public function getCustomerContacts($id, $params = [])
     {
         $response = $this->makeHttpRequest('GET', "/ecommerce/customers/{$id}/contacts", $params);
-        return !empty($response['data']) ? $response['data'] : null;
+        return !empty($response['data']) ? $response['data'] : [];
     }
 
     /**
@@ -580,10 +598,11 @@ class Api
      * @param int $p21CustomerId
      * @param array $skus
      * @param array $quantities
+     * @param array $uom
      * @return array
      * @throws \LengthException
      */
-    public function getCustomerPriceData($p21CustomerId, $skus, $quantities = null)
+    public function getCustomerPriceData($p21CustomerId, $skus, $quantities = null, $uom = null)
     {
         if (is_array($quantities) && count($quantities) !== count($skus)) {
             throw new \LengthException('Mismatch between SKUs and quantities specified.');
@@ -597,7 +616,7 @@ class Api
             $itemsQuery[] = [
                 'item_id' => $sku,
                 'qty' => $quantities[$i] ?? 1,
-                'uom' => null
+                'uom' => $uom[$i] ?? null
             ];
         }
 
@@ -679,6 +698,26 @@ class Api
     public function getCustomerTaxableFlag($customerId, $params = [])
     {
         return $this->parseCustomerTaxableFlag($this->getCustomer($customerId, $params));
+    }
+
+    /**
+     * @param $customerId
+     * @param array $params
+     * @return array
+     * @throws P21ApiException
+     */
+    public function getCustomerBillTos($customerId, $params = [])
+    {
+        $response = $this->makeHttpRequest('GET', "/ecommerce/customers/{$customerId}/billtos", $params);
+        $return = [];
+
+        if (! empty($response['data'])) {
+            foreach ($response['data'] as $row) {
+                $return[] = $this->normalizeAddress($row);
+            }
+        }
+
+        return $return;
     }
 
     /**
@@ -909,7 +948,7 @@ class Api
     protected function normalizeAddress(array $data)
     {
         return [
-            'address_id' => $data['id'],
+            'address_id' => $data['id'] ?? null,
             'customer_code' => $data['corp_address_id'],
             'name' => $data['name'],
             'street1' => $data['phys_address1'] ?: $data['mail_address1'],
@@ -920,8 +959,8 @@ class Api
             'country_id' => $data['phys_country'] ?: $data['mail_country'],
             'telephone' => $data['central_phone_number'],
             'email' => $data['email_address'],
-            'default_packing_basis' => $data['packing_basis'],
-            'default_carrier_id' => $data['default_carrier_id'],
+            'default_packing_basis' => $data['packing_basis'] ?? null,
+            'default_carrier_id' => $data['default_carrier_id'] ?? null
         ];
     }
 
@@ -1047,6 +1086,15 @@ class Api
     public function parseInvoiceAmountPaid($data)
     {
         return $data['amount_paid'];
+    }
+
+    /**
+     * @param array $data
+     * @return string
+     */
+    public function parseUom($data)
+    {
+        return $data['unit_of_measure'];
     }
 
     /**
