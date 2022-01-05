@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="SimpleApps" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="0" showInStore="0">
+            <label>SimpleApps</label>
+            <tab>service</tab>
+            <resource>Ripen_SimpleApps::config_simpleapps</resource>
+            <group id="api" translate="label" sortOrder="20" type="text" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>API Configuration</label>
+                <field id="base_url" translate="label" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Base URL</label>
+                    <validate>required-entry</validate>
+                </field>
+                <!-- TODO: Change backend type to be encrypted, and if possible front-end *not* to be masked -->
+                <field id="x_api_key" type="password" translate="label" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>API Key</label>
+                    <validate>required-entry</validate>
+                </field>
+                <field id="site_id" translate="label" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Site ID</label>
+                    <validate>required-entry</validate>
+                </field>
+                <field id="debug_mode_timeout" translate="label" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Debug Mode Active Until</label>
+                    <comment>While enabled will log all API requests and responses. Accepts date/time as YYYY-MM-DD HH:MM in UTC time.</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
