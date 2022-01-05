@@ -1,0 +1,20 @@
+<?php
+/** @var \Ripen\BudgetCap\Block\BudgetInfo $block */
+?>
+<?php if ($block->getTotalBudgetCap()): ?>
+    <div class="block block-dashboard-info">
+        <div class="block-content">
+            <div class="box box-information">
+                <strong class="box-title">
+                    <span><?= $block->escapeHtml(__('Budget Limit')) ?></span>
+                </strong>
+                <div class="box-content">
+                    <p>
+                        Your total budget limit: <?= $block->getTotalBudgetCap() ?> per <?= $block->getBudgetCapPeriod() ?><br/>
+                        Remaining budget this period: <?= $block->getRemainingBudget() ?>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Cminds MultiUserAccounts layout update for subaccounts_manage_edit route.
+ *
+ * @category    Cminds
+ * @package     Cminds_MultiUserAccounts
+ * @author      Piotr Pierzak <piotr@cminds.com>
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Ripen_BudgetCap::css/subaccounts.css"/>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Ripen\BudgetCap\Block\Manage\Form\Edit" name="subaccounts_manage_edit"
+                   template="Ripen_BudgetCap::manage/form/edit.phtml"
+                   cacheable="false"/>
+        </referenceContainer>
+    </body>
+</page>

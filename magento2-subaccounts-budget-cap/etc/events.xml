@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="checkout_submit_before">
+        <observer name="ripen_subaccounts_budget_cap_checkout_submit_before"
+                  instance="Ripen\BudgetCap\Observer\Checkout\Quote\SubmitBefore"/>
+    </event>
+</config>

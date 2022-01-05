@@ -1,0 +1,3 @@
+.form-edit-account fieldset:nth-child(odd), .form-edit-account fieldset:nth-child(even) {
+    float: none;
+}
