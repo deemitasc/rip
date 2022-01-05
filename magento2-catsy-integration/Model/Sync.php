@@ -159,7 +159,7 @@ class Sync
                 $pimProducts = $this->api->getProducts($params, array("filters" => $filters));
             } catch (\GuzzleHttp\Exception\GuzzleException $e) {
                 $this->logger->error("API error while getting products: " . $e->getMessage());
-                $this->logger->error("Filters: [".json_encode($filters)."]");
+                $this->logger->error("Filters: [$filters]");
             }
 
             foreach ($pimProducts as $pimProductData) {
